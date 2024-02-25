@@ -35,7 +35,7 @@ def sidebar(page_id: str):
             html.Ul(
                 [
                     page_nav_links("lucide:shopping-bag", "Order", "/"),
-                    page_nav_links("iconamoon:delivery-fill", "Duration", "/duration"),
+                    page_nav_links("iconamoon:delivery-fill", "Duration", "/durations"),
                     page_nav_links("mdi:users-group", "Sellers", "/seller"),
                     dmc.Tooltip(
                         withArrow=True,
