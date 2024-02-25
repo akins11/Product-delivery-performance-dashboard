@@ -1,0 +1,223 @@
+/* --------------------- Stats Cards ---------------------------- */
+.ord-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.ord-stats_card {
+    flex: 1;
+    height: 120px;
+    background-color: white;
+    padding: var(--cont-p);
+    border-radius: var(--b-radius);
+}
+
+.ord-stats_card.count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ord-sc_value_column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.ord-sc_title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+.ord-sc-value {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+}
+
+.ord-sc_change {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+.ord-sc-percent {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+.ord-sc-percent-text {
+    font-size: 1rem;
+    font-weight: 500;
+}
+.ord-sc_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ord-container {
+    border-radius: var(--b-radius);
+    background-color: white;
+    padding: 0.3rem;
+}
+
+.ord-sc_graph_column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+}
+
+.ord-sc_percent_title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+
+.ord-stats_card.mtd {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ord-mt_tooltip_container {
+    align-self: flex-end;
+}
+
+.ord-mtd_content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* margin-top: 1rem; */
+}
+.ord-mtd_title {
+    font-size: 2rem;
+    font-weight: 500;
+}
+.ord-mtd_value {
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-decoration: underline;
+}
+.ord-m_bottom_text {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-top: 0.4rem;
+    color: var(--text-muted);
+}
+
+.ord-mom_gr_percent {
+    font-size: 0.7rem;
+}
+
+.ord-mom_value_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+.ord-mom_icon_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ord-mom_value {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.ord-mom_value_text {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+
+.ord-status_container {
+    background-color: white;
+    border-radius: var(--b-radius);
+    height: 100%;
+    padding: 1rem;
+
+}
+
+.ord-s_title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+}
+
+.ord-s_name_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.1rem 0.2rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--b-radius);
+    transition: .5s ease;
+}
+.ord-s_name_container:hover {
+    background-color: var(--bg-color);
+}
+.ord-s_name_container:hover.Delivered {background-color: var(--th-color1);}
+.ord-s_name_container:hover.Shipped {background-color: var(--yellow-color1);}
+.ord-s_name_container:hover.Canceled {background-color: var(--red-color1);}
+.ord-s_name_container:hover.Unavailable {background-color: var(--red-color1);}
+.ord-s_name_container:hover.Invoiced {background-color: var(--blue-color1);}
+
+.ord-s_name {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.ord-s_name.Delivered {color: var(--th-color6);}
+.ord-s_name.Shipped {color: var(--yellow-color2);}
+.ord-s_name.Canceled {color: var(--red-color5);}
+.ord-s_name.Unavailable {color: var(--red-color5);}
+.ord-s_name.Invoiced {color: var(--blue-color2);}
+
+.ord-s_value {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-top: 0.2rem;
+    margin-bottom: 1.7rem;
+    margin-left: 1rem;
+}
+.ord-s_modal_trigger {
+    margin-bottom: 1.2rem;
+}
+
+.ord-modal_content_container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.ord-modal_figure {
+    width: 100%;
+    height: 450px;
+}
+/* ------------------------ Chart (row 2) ------------------------ */
+/* .ord-col {
+    background-color: red;
+    border-radius: var(--b-radius);
+    min-height: 200px;
+} */
+
+
+
+
+@media (max-width: 768px) {
+    .ord-lg-container {
+        flex: 0 1 100%;
+    }
+    .ord-md-container {
+
+        flex: 0 1 100%;
+    }
+}

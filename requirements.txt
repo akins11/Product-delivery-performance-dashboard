@@ -1,0 +1,7 @@
+dash==2.13.0
+dash-iconify
+dash-mantine-components
+numpy
+pandas
+plotly
+gunicorn

@@ -1,0 +1,178 @@
+
+
+.dp-breadcrumb {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+}
+
+.dp-bc_item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: .5s ease;
+}
+
+.dp-bc_item-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.dp-bc_item.active .dp-bc_item-title {
+    color: var(--th-color1);
+}
+
+
+.dp-ps_container {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--b-radius);
+}
+
+.dp-ps_phase_title {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.dp-ps_item {
+    min-width: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    padding: 0.1rem;
+    transition: .5s ease;
+    border-radius: var(--b-radius);
+}
+.dp-ps_item:hover {
+    background-color: var(--bg-color);
+}
+.dp-ps_title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+
+/* ------------------------- Unit of time --------------------------- */
+.dp-unit_time {
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    padding: 2.5rem 1.5rem;
+    border-radius: var(--b-radius);
+}
+
+.dp-ut_title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: underline;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+}
+
+.dp-ut_label_container {
+    width: 100%;
+    height: 2rem;
+    background-color: blanchedalmond;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--b-radius);
+}
+.dp-ut_label_container.seconds {background-color: var(--th-color2);}
+.dp-ut_label_container.minutes {background-color: var(--th-color3);}
+.dp-ut_label_container.hours {background-color: var(--th-color4);}
+.dp-ut_label_container.days {background-color: var(--th-color5);}
+
+.dp-ut_label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color-light);
+}
+/* .dp-ut_label.seconds {color: var(--text-color-light);}
+.dp-ut_label.minutes {color: var(--text-color-light);}
+.dp-ut_label.hours {color: var(--text-color-light);}
+.dp-ut_label.days {color: var(--text-color-light);} */
+
+
+.dp-ut_count {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 2rem 0;
+    letter-spacing: 2px;
+    padding-left: 1rem;
+}
+
+.dp-ut_percent {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 2rem 0;
+}
+.dp-ut_percent_value {
+    font-size: 1.3rem;
+    margin-right: 0.2rem;
+}
+
+
+.dp-chart {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: var(--b-radius);
+    padding: 0.2rem;
+}
+
+.dp-chart-settings_container {
+    align-self: flex-end;
+}
+
+
+
+@media screen and (max-width: 320px) {
+    .dp-unit_time {padding: 1.5rem 0.5rem;}
+
+    .dp-ut_title {
+        font-size: 0.8rem;
+        font-weight: 500;
+        /* overflow: hidden; */
+        text-wrap: wrap;
+    }
+    .dp_ut_title_s {
+        display: block !important;
+    }
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .dp-breadcrumb {gap: 0.5rem;}
+    .dp-bc_item {gap: 0.3rem;}
+
+    .dp-bc_item-title {font-size: 0.7rem;}
+
+    /* .dp-ps_container {} */
+    .dp-ps_phase_title {font-size: 1rem;}
+
+    .dp-ps_title {font-size: 1.1rem;}
+
+    /* ------------------------- Unit of time --------------------------- */
+    .dp-unit_time {padding: 1.5rem 1rem;}
+
+    .dp-ut_title {
+        font-size: 1rem;
+        font-weight: 600;
+    }
+    .dp_ut_title_s {display: none;}
+}

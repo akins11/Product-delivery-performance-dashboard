@@ -1,0 +1,195 @@
+:root {
+    --bg-color: #fafafa;
+    --text-color: #444444;
+    --text-muted:rgb(73, 73, 73);
+    --text-color-light: #FFFFFF;
+    --bg-con-color: #FFFFFF;
+    --b-radius: 10px;
+    --cont-p: 1rem;
+    --th-color1: #38D9A9;
+    --th-color2: #20C997;
+    --th-color3: #12B886;
+    --th-color4: #0CA678;
+    --th-color5: #099268;
+    --th-color6: #087F5B;
+
+    --red-color1: #FF8FA3;
+    --red-color2: #FF758F;
+    --red-color3: #FF4D6D;
+    --red-color4: #C9184A;
+    --red-color5: #A4133C;
+
+    --yellow-color1: rgb(255, 255, 181);
+    --yellow-color2: rgb(255, 230, 0);
+
+    --blue-color1: rgb(192, 192, 255);
+    --blue-color2: blue;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-color) !important;
+    color: var(--text-color);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* --------------- Page Layout -------------------- */
+.page-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.page-main-content {
+    width: 88%;
+    /* overflow-y: scroll; */
+    margin-left: 12%;
+    padding: 10px;
+}
+
+
+.pmc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 3rem;
+    border-radius: var(--b-radius);
+    padding: var(--cont-p);
+}
+
+.pmc-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.pmc-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pmc-select-title {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
+.pmc-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+
+.p-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.p-column {
+    padding: 1rem;
+}
+
+
+.graph-container {
+    min-height: 300px;
+    background-color: white;
+    border-radius: var(--b-radius);
+    padding: 0.2rem;
+}
+
+
+/* ------------ Scroll bar ------------------ */
+::-webkit-scrollbar {
+width: 8px;
+height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+background: #4b4e53;
+border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: #4b4e53;
+}
+
+::-webkit-scrollbar-track {
+background: #d4d2da;
+}
+
+/* ------------------------------ grid Layout ------------------------- */
+.c-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+}
+
+.span-3 {grid-column: span 3;}
+.span-4 {grid-column: span 4;}
+.span-5 {grid-column: span 5;}
+.span-6 {grid-column: span 6;}
+.span-7 {grid-column: span 7;}
+.span-8 {grid-column: span 8;}
+.span-9 {grid-column: span 9;}
+.span-10 {grid-column: span 10;}
+.span-11 {grid-column: span 11;}
+.span-12 {grid-column: span 12;}
+
+
+/* ------------------------------ Toggle ------------------------------ */
+.sidebar_toggle_button {
+    display: none;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    .page-main-content {
+        width: 100% !important;
+        margin-left: 0 !important;
+        padding: 5px;
+    }
+
+    .pmc-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 0.8rem;
+        height: 7rem;
+        padding: var(--cont-p);
+    }
+
+    .p-row {flex-direction: column;}
+
+    .span-1, .span-2, .span-3, .span-4, .span-5,
+    .span-6, .span-7, .span-8, .span-9, .span-10,
+    .span-11 {
+        grid-column: span 12;
+    }
+
+    .sidebar_toggle_button {
+        display: block;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }
+}
