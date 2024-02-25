@@ -10,7 +10,7 @@ from components.order_comp import status_summary
 from components.orders_callback import *
 
 # Register page
-dash.register_page(__name__, path='/', name="Orders Insight", description="Orders ...")
+dash.register_page(__name__, path='/', name="Orders Insight", description="Product Order metrics across different months")
 
 
 order_page_content_layout = html.Div(
