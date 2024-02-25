@@ -22,11 +22,6 @@ app.layout = dmc.MantineProvider(
     theme={
         "fontFamily": "'Inter', sans-serif",
         "primaryColor": "teal",
-        # "components": {
-        #     "Button": {"styles": {"root": {"fontWeight": 400}}},
-        #     "Alert": {"styles": {"title": {"fontWeight": 500}}},
-        #     "AvaterGroup": {"styles": {"truncated": {"fontWeight": 500}}},
-        # },
     },
     inherit=True,
     withGlobalStyles=True,
