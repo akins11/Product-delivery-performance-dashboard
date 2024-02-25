@@ -8,7 +8,6 @@ import plotly.io as pio
 pio.templates.default = "plotly_white"
 
 from logic.global_function import filter_month
-from components.utils import default_color
 
 plot_color = "#38D9A9"
 
