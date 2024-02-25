@@ -11,7 +11,7 @@ app = Dash(
         "https://fonts.googleapis.com/css2family=Inter:wght@100;200;300;400;500;600;900&display=swap"
     ],
 )
-# server = app.server
+server = app.server
 
 orders_data = read_csv("data/orders.csv")
 customers_data = read_csv("data/customers.csv")
@@ -45,7 +45,5 @@ app.layout = dmc.MantineProvider(
     ]
 )
 
-# print(page_registry.values())
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
