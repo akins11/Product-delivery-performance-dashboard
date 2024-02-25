@@ -17,7 +17,7 @@ def get_stats_numbers(df: DataFrame, date_var: str, month_name: str, output_type
     :params
     df: App data.
     month_name: input month name.
-    output_type: either ['order_volume', 'unique_customers']
+    output_type: either ['orders', 'customer']
 
     :return a dictionary of Order volume values.
     """
@@ -34,7 +34,7 @@ def get_stats_numbers(df: DataFrame, date_var: str, month_name: str, output_type
     
     # check if output type is accurately described.
     if output_type not in ["orders", "customer"]:
-        error_dict["message"] = "Invalid `output_type` value. Please input either 'order_volume' or 'unique_customers'"
+        error_dict["message"] = "Invalid `output_type` value. Please input either 'orders' or 'customer'"
         return error_dict
     
     # Get the list of month name and assign them their respective ids
