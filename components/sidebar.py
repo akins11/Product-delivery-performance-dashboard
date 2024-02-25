@@ -24,7 +24,6 @@ def sidebar(page_id: str):
 
     return html.Nav(
         [
-            # html.A("X", id="ps-close_side_bar", className="ps-toggle"),
             html.Div(
                 [
                     html.H2("Delivery Insight", className="ps-title"),
