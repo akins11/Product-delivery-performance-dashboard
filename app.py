@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, page_container, page_registry
+from dash import Dash, html, dcc, page_container
 import dash_mantine_components as dmc
 from pandas import read_csv
 
