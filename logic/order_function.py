@@ -249,7 +249,6 @@ def daily_order_volume(data_dict: dict, date_var: str, month_name: str):
                 bordercolor=plot_color
             )
         )
-        # func_fig.update_layout(height=400)
         func_fig.update_xaxes(showgrid=False) #tickmode="linear", dtick=1
         return func_fig
     else:
@@ -265,7 +264,7 @@ def get_week_volume(data_dict: dict, date_var: str, month_name: str):
 
     :return a plotly object
     """
-    
+
     if data_dict["error"] == False:
         func_df = (
             data_dict["data"]

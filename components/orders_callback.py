@@ -31,8 +31,8 @@ def update_count_stats(data_dict: dict, month: str, output_type: str) -> tuple:
                 )
             else:
                 change_icon = DashIconify(
-                    icon="solar:round-alt-arrow-down-broken", color=DEFAULT_COLORS["gray"][7], height=20
-                ) # /!\ =====
+                    icon="bi:dash-circle", color=DEFAULT_COLORS["gray"][7], height=20
+                )
 
             # Percentage change sectionf
             total_change_label = f"{stats_dict['percentage_total']}%"
