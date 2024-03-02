@@ -206,17 +206,15 @@ def monthly_order_volume(df: DataFrame, date_var: str, month_name: str, plot_typ
         return px.line()
 
 
-def daily_order_volume(df: DataFrame, date_var: str, month_name: str):
+def daily_order_volume(data_dict: dict, date_var: str, month_name: str):
     """
     :params
-    df: App data.
+    df: A doctionary output of the filter_month function.
     date_var: a date variable from the df, used to filter the data.
     month_name: input month (dashboard current month).
 
     :return a plotly object
     """
-
-    data_dict = filter_month(df, date_var, month_name, False, True)
 
     if data_dict["error"] == False:
         func_df = (
@@ -258,18 +256,16 @@ def daily_order_volume(df: DataFrame, date_var: str, month_name: str):
         return line()
 
 
-def get_week_volume(df: DataFrame, date_var: str, month_name: str):
+def get_week_volume(data_dict: dict, date_var: str, month_name: str):
     """ 
     :params
-    df: App data.
+    df: df: A doctionary output of the filter_month function.
     date_var: a date variable from the df, used to filter the data.
     month_name: input month (dashboard current month).
 
     :return a plotly object
     """
-
-    data_dict = filter_month(df, date_var, month_name, False, True)
-
+    
     if data_dict["error"] == False:
         func_df = (
             data_dict["data"]
@@ -298,7 +294,6 @@ def get_week_volume(df: DataFrame, date_var: str, month_name: str):
     else:
         return pie()
     
-
 
 def status_count(df: DataFrame, date_var: str, month_name: str) -> dict:
     """
