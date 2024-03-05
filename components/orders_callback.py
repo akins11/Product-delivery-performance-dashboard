@@ -3,14 +3,37 @@ from dash.exceptions import PreventUpdate
 from dash_iconify import DashIconify 
 from dash_mantine_components.theme import DEFAULT_COLORS
 
-from logic.global_function import check_valid_month_name, filter_month, clean_date
+from logic.global_function import filter_month, clean_date
 from logic.order_function import *
 from components.utils import month_abbrev, default_date_variable, default_color, delivery_status
+
+
+def filter_single_month(data_dict: dict, month: str):
+    """ 
+    """
+
+    if data_dict != {}:
+        selected_month = filter_month(
+            clean_date(DataFrame(data_dict), "orders"),
+            date_var=default_date_variable,
+            month_name=month,
+            leading_up_to_month=False,
+            drop_prev_year=True
+        )
+
+        if selected_month["error"]:
+            raise PreventUpdate
+        else:
+            return selected_month["data"].to_dict("records")
+    else:
+        raise PreventUpdate
+
 
 
 def update_count_stats(data_dict: dict, month: str, output_type: str) -> tuple:
     """ 
     """
+
     if data_dict != {}:
         # Convert to pandas dataframe
         func_df = clean_date(DataFrame(data_dict), output_type)
@@ -34,7 +57,7 @@ def update_count_stats(data_dict: dict, month: str, output_type: str) -> tuple:
                     icon="bi:dash-circle", color=DEFAULT_COLORS["gray"][7], height=20
                 )
 
-            # Percentage change sectionf
+            # Percentage change section
             total_change_label = f"{stats_dict['percentage_total']}%"
             section = [{
                 "value": stats_dict["percentage_total"], "color": default_color, "tooltip": total_change_label
@@ -87,7 +110,7 @@ def update_months_values(data_dict: dict, month: str) -> tuple:
         raise PreventUpdate
 
 
-def update_chart_callback(data_dict: dict, month: str):
+def update_chart_callback(data_dict: dict, single_month_dict: dict, month: str): # ~/
     """ 
     """
 
@@ -96,12 +119,13 @@ def update_chart_callback(data_dict: dict, month: str):
         func_df = clean_date(DataFrame(data_dict), "orders")
 
         # Filter selected month data
-        data_dict = filter_month(func_df, default_date_variable, month, False, True)
+        single_month_func_df = clean_date(DataFrame(single_month_dict), "orders")
+        # data_dict = filter_month(func_df, default_date_variable, month, False, True)
 
         return (
             monthly_order_volume(func_df, default_date_variable, month, "line"),
-            get_week_volume(data_dict, default_date_variable, month),
-            daily_order_volume(data_dict, default_date_variable, month)
+            get_week_volume(single_month_func_df, default_date_variable, month),
+            daily_order_volume(single_month_func_df, default_date_variable, month)
         )
     else:
         raise PreventUpdate
@@ -134,13 +158,22 @@ def update_status_chart(data_dict: dict, month: str, status_type: str):
     """ 
     """
 
-    if data_dict != {}:
-        if status_type in delivery_status:
-            # Convert to pandas dataframe
-            func_df = clean_date(DataFrame(data_dict), "orders")
-            
-            func_df = func_df.query(f"order_status == '{status_type}'")
-            return monthly_order_volume(func_df, default_date_variable, month)
+    
+
+
+def update_status_charts(data_dict: dict, month: str, is_opened: bool, status_type):
+    """ 
+    """
+    if is_opened:
+        if data_dict != {}:
+            if status_type in delivery_status:
+                # Convert to pandas dataframe
+                func_df = clean_date(DataFrame(data_dict), "orders")
+                
+                func_df = func_df.query(f"order_status == '{status_type}'")
+                return monthly_order_volume(func_df, default_date_variable, month)
+            else:
+                raise PreventUpdate
         else:
             raise PreventUpdate
     else:
