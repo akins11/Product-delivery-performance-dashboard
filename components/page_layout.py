@@ -67,7 +67,8 @@ def dashboard_page_layout(
 
 
 def graph_container(id: str, graph_height: str="370px"):
-
+    """ 
+    """
     return html.Div(
         dcc.Graph(id=id, config=config_plotly, style={'height': graph_height}),
         className="graph-container"
