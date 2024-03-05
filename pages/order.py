@@ -10,11 +10,12 @@ from components.order_comp import status_summary
 from components.orders_callback import *
 
 # Register page
-dash.register_page(__name__, path='/', name="Orders Insight", description="Product Order metrics across different months")
+dash.register_page(__name__, path='/', name="Orders Insight", description="Product Order metrics for different months")
 
 
 order_page_content_layout = html.Div(
     [
+        dcc.Store(id="store_selected_month_data", data={}),
         html.Div(
             [
                 stats_card("orders"),
@@ -59,6 +60,14 @@ def toggle_sidebar(is_opened):
 
     return "page-sidebar" if is_opened else "page-sidebar close"
 
+@callback(
+    Output("store_selected_month_data", "data"),
+
+    Input('store_orders_data', 'data'),
+    Input("orders_selected_month", "value")
+)
+def filter_selected_month(data, month):
+    return filter_single_month(data, month)
 
 
 @callback(
@@ -72,7 +81,7 @@ def toggle_sidebar(is_opened):
     Input("orders_selected_month", "value")
 )
 def update_orders_count_stats(data, month):
-    return update_count_stats(data_dict=data, month=month, output_type="orders")
+    return update_count_stats(data, month, "orders")
 
 
 
@@ -87,7 +96,7 @@ def update_orders_count_stats(data, month):
     Input("orders_selected_month", "value")
 )
 def update_orders_count_stats(data, month):
-    return update_count_stats(data_dict=data, month=month, output_type="customer")
+    return update_count_stats(data, month, "customer")
 
 
 @callback(
@@ -110,10 +119,11 @@ def update_month_stats(data, month):
     Output("order_days_chart", "figure"),
 
     Input('store_orders_data', 'data'),
+    Input("store_selected_month_data", "data"),
     Input("orders_selected_month", "value")
 )
-def update_charts(data, month):
-    return update_chart_callback(data, month)
+def update_charts(data, single_month_data, month):
+    return update_chart_callback(data, single_month_data, month)
 
 
 @callback(
@@ -123,7 +133,7 @@ def update_charts(data, month):
     Output("unavailable_status", "children"),
     Output("invoiced_status", "children"),
 
-    Input('store_orders_data', 'data'),
+    Input("store_selected_month_data", "data"),
     Input("orders_selected_month", "value")
 )
 def update_status_cat_count(data, month):
@@ -131,76 +141,117 @@ def update_status_cat_count(data, month):
 
 
 
-def toggle_modal(n_click, opened):
+# def toggle_modal(n_click, opened):
+#     return not opened
+
+# for status_model_id in delivery_status:
+#     callback(
+#         Output(f"{status_model_id}_modal", "opened"),
+#         Input(f"{status_model_id}_trigger", "n_clicks"),
+#         State(f"{status_model_id}_modal", "opened"),
+#         prevent_initial_call=True
+#     )(toggle_modal)
+
+
+# Modal toggle
+
+@callback(
+    Output("delivered_modal", "opened"),
+    Input("delivered_trigger", "n_clicks"),
+    State("delivered_modal", "opened"),
+    prevent_initial_call=True
+)
+def toggle_delivered_modal(n_click, opened):
     return not opened
 
-for status_model_id in delivery_status:
-    callback(
-        Output(f"{status_model_id}_modal", "opened"),
-        Input(f"{status_model_id}_trigger", "n_clicks"),
-        State(f"{status_model_id}_modal", "opened"),
-        prevent_initial_call=True
-    )(toggle_modal)
+@callback(
+    Output("shipped_modal", "opened"),
+    Input("shipped_trigger", "n_clicks"),
+    State("shipped_modal", "opened"),
+    prevent_initial_call=True
+)
+def toggle_shipped_modal(n_click, opened):
+    return not opened
 
+@callback(
+    Output("canceled_modal", "opened"),
+    Input("canceled_trigger", "n_clicks"),
+    State("canceled_modal", "opened"),
+    prevent_initial_call=True
+)
+def toggle_canceled_modal(n_click, opened):
+    return not opened
 
+@callback(
+    Output("unavailable_modal", "opened"),
+    Input("unavailable_trigger", "n_clicks"),
+    State("unavailable_modal", "opened"),
+    prevent_initial_call=True
+)
+def toggle_unavailable_modal(n_click, opened):
+    return not opened
+
+@callback(
+    Output("invoiced_modal", "opened"),
+    Input("invoiced_trigger", "n_clicks"),
+    State("invoiced_modal", "opened"),
+    prevent_initial_call=True
+)
+def toggle_invoiced_modal(n_click, opened):
+    return not opened
     
-# @callback(
-#     Output("delivered_month_chart", "figure"),
 
-#     Input("delivered_modal", "opened"),
-#     Input('store_orders_data', 'data'),
-#     Input("orders_selected_month", "value")
-# )
-# def update_delivered_chart(is_opened: bool, data: dict, month: str):
-#     if is_opened:
-#         return update_status_chart(data, month, "delivered")
-#     else:
-#         raise PreventUpdate
+@callback(
+    Output("delivered_month_chart", "figure"),
 
-# @callback(
-#     Output("shipped_month_chart", "figure"),
+    Input("delivered_modal", "opened"),
+    Input('store_orders_data', 'data'),
+    Input("orders_selected_month", "value"),
+    prevent_initial_call=True
+)
+def update_delivered_chart(is_opened: bool, data: dict, month: str):
+    return update_status_charts(data, month, is_opened, "delivered")
 
-#     Input("shipped_modal", "opened"),
-#     Input('store_orders_data', 'data'),
-#     Input("orders_selected_month", "value")
-# )
-# def update_shipped_chart(is_opened: bool, data: dict, month: str):
-#     if is_opened:
-#         return update_status_chart(data, month, "shipped")
-#     else:
-#         raise PreventUpdate
+@callback(
+    Output("shipped_month_chart", "figure"),
 
-# @callback(
-#     Output("canceled_month_chart", "figure"),
+    Input("shipped_modal", "opened"),
+    Input('store_orders_data', 'data'),
+    Input("orders_selected_month", "value"),
+    prevent_initial_call=True
+)
+def update_shipped_chart(is_opened: bool, data: dict, month: str):
+    return update_status_charts(data, month, is_opened, "shipped")
 
-#     Input("canceled_modal", "opened"),
-#     Input('store_orders_data', 'data'),
-#     Input("orders_selected_month", "value")
-# )
-# def update_canceled_chart(is_opened: bool, data: dict, month: str):
-#     if is_opened: 
-#         return update_status_chart(data, month, "canceled")
-#     else:
-#         raise PreventUpdate
+@callback(
+    Output("canceled_month_chart", "figure"),
 
-# @callback(
-#     Output("unavailable_month_chart", "figure"),
+    Input("canceled_modal", "opened"),
+    Input('store_orders_data', 'data'),
+    Input("orders_selected_month", "value"),
+    prevent_initial_call=True
+)
+def update_canceled_chart(is_opened: bool, data: dict, month: str):
+    return update_status_charts(data, month, is_opened, "canceled")
 
-#     Input("unavailable_modal", "opened"),
-#     Input('store_orders_data', 'data'),
-#     Input("orders_selected_month", "value")
-# )
-# def update_unavailable_chart(is_opened: bool, data: dict, month: str):
-#     if is_opened: 
-#         return update_status_chart(data, month, "unavailable")
-#     else:
-#         raise PreventUpdate
+@callback(
+    Output("unavailable_month_chart", "figure"),
 
-# @callback(
-#     Output("invoiced_month_chart", "figure"),
+    Input("unavailable_modal", "opened"),
+    Input('store_orders_data', 'data'),
+    Input("orders_selected_month", "value"),
+    prevent_initial_call=True
+)
+def update_unavailable_chart(is_opened: bool, data: dict, month: str):
+    return update_status_charts(data, month, is_opened, "unavailable")
 
-#     Input('store_orders_data', 'data'),
-#     Input("orders_selected_month", "value")
-# )
-# def update_invoiced_chart(data: dict, month: str):
-#     return update_status_chart(data, month, "invoiced")
+@callback(
+    Output("invoiced_month_chart", "figure"),
+
+    Input("invoiced_modal", "opened"),
+    Input('store_orders_data', 'data'),
+    Input("orders_selected_month", "value"),
+    prevent_initial_call=True
+)
+def update_invoiced_chart(is_opened: bool, data: dict, month: str):
+    return update_status_charts(data, month, is_opened, "invoiced")
