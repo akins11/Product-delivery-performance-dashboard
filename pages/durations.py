@@ -14,8 +14,8 @@ dash.register_page(__name__, name="Order Shipping Duration", description="Durati
 
 duration_page_content_layout = html.Div(
     [
-        dcc.Store(id=f"month_filtered_data", data={}),
-        dcc.Store(id=f"date_diff_data", data={}),
+        dcc.Store(id="month_filtered_data", data={}),
+        dcc.Store(id="date_diff_data", data={}),
 
         
         grid_container(
@@ -69,7 +69,6 @@ def toggle_sidebar(is_opened):
 )
 def update_delivery_phase_data(from_phase, to_phase):
     return valid_phase_options(from_phase, to_phase)
-# suppress_callback_exceptions=True
 
 @callback(
     Output("placement", "className"),
