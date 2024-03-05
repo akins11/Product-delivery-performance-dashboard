@@ -140,7 +140,7 @@ def month_stats(df: DataFrame, date_var: str, month_name: str) -> dict:
 def monthly_order_volume(df: DataFrame, date_var: str, month_name: str, plot_type: str="line"):
     """
     :params
-    df: App data
+    df: App data.
     date_var: a date variable from the df, used to filter the data.
     month_name: input month (dashboard current month).
     plot_type: the type of plot to return either a 'line' or 'bar' chart
@@ -206,19 +206,19 @@ def monthly_order_volume(df: DataFrame, date_var: str, month_name: str, plot_typ
         return px.line()
 
 
-def daily_order_volume(data_dict: dict, date_var: str, month_name: str):
+def daily_order_volume(data: DataFrame, date_var: str, month_name: str):
     """
     :params
-    df: A doctionary output of the filter_month function.
+    data: A dataframe output of the filter_month function.
     date_var: a date variable from the df, used to filter the data.
     month_name: input month (dashboard current month).
 
     :return a plotly object
     """
 
-    if data_dict["error"] == False:
+    if data is not None:
         func_df = (
-            data_dict["data"]
+            data
             .assign(day=lambda _: _[date_var].dt.day)
             ["day"]
             .value_counts()
@@ -255,19 +255,19 @@ def daily_order_volume(data_dict: dict, date_var: str, month_name: str):
         return line()
 
 
-def get_week_volume(data_dict: dict, date_var: str, month_name: str):
+def get_week_volume(data: dict, date_var: str, month_name: str):
     """ 
     :params
-    df: df: A doctionary output of the filter_month function.
+    data: A dataframe output of the filter_month function.
     date_var: a date variable from the df, used to filter the data.
     month_name: input month (dashboard current month).
 
     :return a plotly object
     """
 
-    if data_dict["error"] == False:
+    if data is not None:
         func_df = (
-            data_dict["data"]
+            data
             .assign(
                 day_of_week=lambda _: _[date_var].dt.dayofweek,
                 week_period=lambda _: where((_["day_of_week"] >= 0) & (_["day_of_week"] <= 4), "Weekday", "weekend")
@@ -297,23 +297,20 @@ def get_week_volume(data_dict: dict, date_var: str, month_name: str):
 def status_count(df: DataFrame, date_var: str, month_name: str) -> dict:
     """
     :params
-    df: App data.
+    df: App data (filtered by the selected month).
     date_var: a date variable from the df, used to filter the data.
     month_name: input month (dashboard current month).
 
     :return a dictionary of status count for the inputed month.
     """
 
-    # info
-    # if a particular status is missing in a month, replace them with zero
+    # data_dict = filter_month(df, date_var, month_name, False, True)
 
-    data_dict = filter_month(df, date_var, month_name, False, True)
-
-    if data_dict["error"] == False:
-        return data_dict["data"]["order_status"].value_counts().to_dict()
-    else:
-        return {}
-    
+    # if data_dict["error"] == False:
+    #     return data_dict["data"]["order_status"].value_counts().to_dict()
+    # else:
+    #     return {}
+    return df["order_status"].value_counts().to_dict()
 
 
 
